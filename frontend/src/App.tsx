@@ -10,9 +10,17 @@ export default function App() {
   const [expense, setExpense] = useState(0);
   const [currency, setCurrency] = useState('EUR');
   const [transactions, setTransactions] = useState<any[]>([]);
-
+  
   const [isAdding, setIsAdding] = useState(false);
   const [isSettings, setIsSettings] = useState(false);
+
+  useEffect(() => {
+    // Включаем Telegram WebApp
+    if (window.Telegram?.WebApp) {
+      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.expand();
+    }
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -125,7 +133,7 @@ export default function App() {
         )}
       </div>
 
-      <button
+      <button 
         onClick={() => setIsAdding(true)}
         className="fixed bottom-6 right-6 w-14 h-14 bg-[#7b61ff] hover:bg-[#6a52db] rounded-full flex items-center justify-center shadow-lg transition-colors"
       >
