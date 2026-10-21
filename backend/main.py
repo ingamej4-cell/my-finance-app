@@ -18,7 +18,8 @@ load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # --- 2. БАЗА ДАННЫХ ---
-SQLALCHEMY_DATABASE_URL = "sqlite:///./finance.db"
+# Для Render используем базу в памяти, чтобы не было ошибок доступа к файлам
+SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
